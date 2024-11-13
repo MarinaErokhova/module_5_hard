@@ -34,21 +34,14 @@ class UrTube:
                 break
 
     def register(self, nickname, password, age):
-        print("gg1")
-        if not self.users:
-            self.users.append(User(nickname, hash(password), age))
-            self.current_user = User(nickname, hash(password), age)
+        for user in self.users:
+            if user.nickname == nickname:
+                print(f'Пользователь {nickname} уже существует')
+                return
 
-            for user in self.users:
-                print("gg2")
-                if user.nickname == nickname:
-                    print(f'Пользователь {nickname} уже существует')
-                    break
-            else:
-                print("gg3")
-                temp_user = User(nickname, hash(password), age)
-                self.users.append(temp_user)
-                self.current_user = nickname
+        temp_user = User(nickname, hash(password), age)
+        self.users.append(temp_user)
+        self.current_user = temp_user
 
     def log_out(self):
         self.current_user = None
